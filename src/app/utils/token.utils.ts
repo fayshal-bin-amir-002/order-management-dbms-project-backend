@@ -1,11 +1,10 @@
 import jwt, { JwtPayload } from "jsonwebtoken";
-import { UserRole } from "../modules/user/user.interface";
-import { Types } from "mongoose";
+import { Role } from "../modules/customer/customer.interface";
 
 export interface IJwtPayload {
-  userId: Types.ObjectId | string;
-  role: UserRole;
-  isActive: boolean;
+  email: string;
+  id: string;
+  role: Role;
 }
 
 export const createToken = (

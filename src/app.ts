@@ -12,11 +12,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: [
-      "http://localhost:3000",
-      "http://localhost:3001",
-      "https://second-deal-market.vercel.app",
-    ],
+    origin: ["http://localhost:3000", "http://localhost:3001"],
     credentials: true,
   })
 );
@@ -26,7 +22,7 @@ app.use("/api/v1", router);
 const getAController = async (req: Request, res: Response) => {
   res.json({
     status: "success",
-    message: "SecondDeal's server is running...",
+    message: "Order Management server is running...",
     time: new Date().toLocaleTimeString(),
     version: "1.0.0",
     author: "Fayshal Bin Amir",

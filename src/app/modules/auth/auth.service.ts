@@ -1,19 +1,18 @@
-import { Types } from "mongoose";
-import User from "../user/user.model";
-import { IAuth } from "./auth.interface";
-import { createToken, IJwtPayload } from "../../utils/token.utils";
 import config from "../../config";
+import { createToken, IJwtPayload } from "../../utils/token.utils";
+import Customer from "../customer/customer.model";
+import { IAuth } from "./auth.interface";
 
 const loginUser = async (payload: IAuth) => {
-  const user = await User.isUserExistsByCredentials(payload?.credential);
-  const { _id, role, isActive, password } = user;
+  const user = await Customer.isCustomerExists(payload?.email);
+  const { email, role, password, _id } = user;
 
-  await User.isPasswordMatched(payload?.password, password);
+  await Customer.isPasswordMatched(payload?.password, password);
 
   const jwtPayload: IJwtPayload = {
-    userId: _id as string,
+    email: email,
     role,
-    isActive,
+    id: _id as string,
   };
 
   const accessToken = createToken(
@@ -21,14 +20,9 @@ const loginUser = async (payload: IAuth) => {
     config.jwt_access_secret as string,
     config.jwt_access_expires_in as string
   );
-  const refreshToken = createToken(
-    jwtPayload,
-    config.jwt_refresh_secret as string,
-    config.jwt_refresh_expires_in as string
-  );
+
   return {
     accessToken,
-    refreshToken,
   };
 };
 

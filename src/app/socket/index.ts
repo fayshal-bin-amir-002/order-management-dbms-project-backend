@@ -1,5 +1,5 @@
 import { Server } from "socket.io";
-import User from "../modules/user/user.model";
+import User from "../modules/customer/customer.model";
 import { Message } from "../modules/message/message.model";
 import { MessageService } from "../modules/message/message.service";
 

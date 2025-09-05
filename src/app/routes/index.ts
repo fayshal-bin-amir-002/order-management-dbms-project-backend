@@ -1,37 +1,32 @@
 import { Router } from "express";
-import { UserRoutes } from "../modules/user/user.routes";
 import { AuthRoutes } from "../modules/auth/auth.routes";
-import { ListingRoutes } from "../modules/listing/listing.routes";
-import { CategoryRoutes } from "../modules/category/category.routes";
-import { TransactionsRoutes } from "../modules/transactions/transactions.routes";
-import { MetaRoutes } from "../modules/meta/meta.routes";
+import { CustomerRoutes } from "../modules/customer/customer.routes";
+import { ProductRoutes } from "../modules/product/product.routes";
+import { OrderRoutes } from "../modules/order/order.route";
+import { DeliveryRoutes } from "../modules/delivery/delivery.route";
 
 const router = Router();
 
 const moduleRoutes = [
   {
-    path: "/users",
-    route: UserRoutes,
+    path: "/customer",
+    route: CustomerRoutes,
   },
   {
     path: "/auth",
     route: AuthRoutes,
   },
   {
-    path: "/listings",
-    route: ListingRoutes,
+    path: "/product",
+    route: ProductRoutes,
   },
   {
-    path: "/category",
-    route: CategoryRoutes,
+    path: "/order",
+    route: OrderRoutes,
   },
   {
-    path: "/transactions",
-    route: TransactionsRoutes,
-  },
-  {
-    path: "/meta-data",
-    route: MetaRoutes,
+    path: "/delivery",
+    route: DeliveryRoutes,
   },
 ];
 

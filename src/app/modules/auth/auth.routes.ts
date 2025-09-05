@@ -5,7 +5,6 @@ import { AuthController } from "./auth.controller";
 
 const router = Router();
 
-// Define routes
 router.post(
   "/login",
   validateRequest(authValidation),
