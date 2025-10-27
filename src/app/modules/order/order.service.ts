@@ -7,6 +7,7 @@ import QueryBuilder from "../../builder/QueryBuilder";
 import Product from "../product/product.model";
 import Customer from "../customer/customer.model";
 import { Delivery } from "../delivery/delivery.model";
+import { Membership } from "../customer/customer.interface";
 
 const createOrder = async (payload: IOrder): Promise<IOrder> => {
   const session = await mongoose.startSession();
@@ -168,6 +169,35 @@ const updateOrderStatus = async (
 
   if (!updatedOrder) {
     throw new AppError(httpStatus.NOT_FOUND, "Order not found");
+  }
+
+  if (status === "delivered") {
+    const deliveredOrders = await Order.find({
+      customer_id: updatedOrder.customer_id,
+      status: "delivered",
+    }).populate("items.product_id", "price");
+
+    const totalDeliveredAmount = deliveredOrders.reduce((acc, order) => {
+      const orderTotal = order.items.reduce((sum, item) => {
+        const price = (item.product_id as any).price || 0;
+        return sum + price * item.quantity;
+      }, 0);
+      return acc + orderTotal;
+    }, 0);
+
+    let membershipUpdate: Membership | null = null;
+
+    if (totalDeliveredAmount >= 300000) {
+      membershipUpdate = Membership.GOLD;
+    } else if (totalDeliveredAmount >= 150000) {
+      membershipUpdate = Membership.SILVER;
+    }
+
+    if (membershipUpdate) {
+      await Customer.findByIdAndUpdate(updatedOrder.customer_id, {
+        membership: membershipUpdate,
+      });
+    }
   }
 
   return updatedOrder;

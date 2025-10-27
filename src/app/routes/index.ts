@@ -4,6 +4,7 @@ import { CustomerRoutes } from "../modules/customer/customer.routes";
 import { ProductRoutes } from "../modules/product/product.routes";
 import { OrderRoutes } from "../modules/order/order.route";
 import { DeliveryRoutes } from "../modules/delivery/delivery.route";
+import { AdminDashboardRoutes } from "../modules/dashboard/dashboard.route";
 
 const router = Router();
 
@@ -27,6 +28,10 @@ const moduleRoutes = [
   {
     path: "/delivery",
     route: DeliveryRoutes,
+  },
+  {
+    path: "/dashboard",
+    route: AdminDashboardRoutes,
   },
 ];
 

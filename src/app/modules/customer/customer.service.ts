@@ -18,6 +18,7 @@ const registerCustomer = async (payload: ICustomer) => {
   }
 
   const customer = await Customer.create(payload);
+
   const { email, role, _id } = customer;
 
   const jwtPayload: IJwtPayload = {
