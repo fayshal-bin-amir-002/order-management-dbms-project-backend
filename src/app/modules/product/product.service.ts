@@ -83,7 +83,7 @@ export const getCustomersByOrderedProduct = async (productId: string) => {
         membership: { $first: "$customer_info.membership" },
       },
     },
-    { $sort: { name: 1 } }, // optional: sort alphabetically by name
+    { $sort: { name: 1 } },
   ]);
 
   if (!customers || customers.length === 0) {
