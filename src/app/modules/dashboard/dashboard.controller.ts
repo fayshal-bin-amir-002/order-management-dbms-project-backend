@@ -9,7 +9,7 @@ const getAdminDashboardData = catchAsync(async (req, res) => {
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: "Admin dashboard data retrived",
+    message: "Admin dashboard data retrived successfully",
     data: result,
   });
 });
