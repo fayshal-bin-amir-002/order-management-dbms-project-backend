@@ -114,7 +114,6 @@ const getAllOrders = async (query: Record<string, unknown>) => {
 const getOrdersByCustomer = async (customerId: string) => {
   const ordersWithDelivery = await Order.aggregate([
     { $match: { customer_id: new mongoose.Types.ObjectId(customerId) } },
-
     {
       $lookup: {
         from: "products",

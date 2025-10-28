@@ -28,8 +28,6 @@ const getAController = async (req: Request, res: Response) => {
     message: "Order Management server is running...",
     time: new Date().toLocaleTimeString(),
     version: "1.0.0",
-    author: "Fayshal Bin Amir",
-    contact: "https://github.com/fayshal-bin-amir-002",
   });
 };
 
