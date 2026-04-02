@@ -17,7 +17,7 @@ app.use(
       "https://order-management-frontend-psi.vercel.app",
     ],
     credentials: true,
-  })
+  }),
 );
 
 app.use("/api/v1", router);
@@ -25,7 +25,7 @@ app.use("/api/v1", router);
 const getAController = async (req: Request, res: Response) => {
   res.json({
     status: "success",
-    message: "Order Management server is running...",
+    message: "Order Management server is running.",
     time: new Date().toLocaleTimeString(),
     version: "1.0.0",
   });
